@@ -1,38 +1,39 @@
 <?php
-    
-	include '../php/csrf_protection/csrf-token.php';
-	include '../php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include '../php/config/config.php';
-	include '../php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include '../php/csrf_protection/csrf-token.php';
+include '../php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include '../php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include '../php/language/en.php';
-	}
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
 
-	if(!$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset($_SESSION['userName'])){
-				
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-			
-	} else {					
-		$time = time();
-								
-		if($time > $_SESSION['expire']){
-			session_destroy();
-			timeout();
-			exit(0);
-		}		
+include '../php/config/config.php';
+include '../php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include '../php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include '../php/language/en.php';
+}
+
+if ( !$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset( $_SESSION['userName'] ) ) {
+
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+
+} else {
+	$time = time();
+
+	if ( $time > $_SESSION['expire'] ) {
+		session_destroy();
+		timeout();
+		exit( 0 );
 	}
-	
-	
+}
+
+
 ?>
 <!doctype html>
 <html>
@@ -41,30 +42,30 @@
         <?php include '../header.php'; ?>
 
     </head>
-	
+
     <body>
-	
-	    <?php 
-		
-			$userInfo = mysql_query("SELECT login_system_registrations_user_id,application_status FROM ".$mysqltable_name_1." WHERE login_system_registrations_user_id = '".mysql_real_escape_string($_SESSION['userLogin'])."'");
-			$userQuery = mysql_num_rows($userInfo);
-						
-			$user = mysql_fetch_array($userInfo);
 
-			if($user['application_status'] == "Completed") {
-				redirect($baseurl.'admin/done.php');
-			}else {
-				if($registration_closed == 'Y') {
-					redirect($baseurl.'admin/thankyou.php');
-					die();
-				}
-			}
-		
-		?>
+	    <?php
 
-	
-	    <?php if($_SESSION['userLogin'] && $_SESSION['userName']){ ?>
-		<div class="wrapper"> 
+$userInfo = mysql_query( "SELECT login_system_registrations_user_id,application_status FROM ".$mysqltable_name_1." WHERE login_system_registrations_user_id = '".mysql_real_escape_string( $_SESSION['userLogin'] )."'" );
+$userQuery = mysql_num_rows( $userInfo );
+
+$user = mysql_fetch_array( $userInfo );
+
+if ( $user['application_status'] == "Completed" ) {
+	redirect( $baseurl.'admin/done.php' );
+}else {
+	if ( $registration_closed == 'Y' ) {
+		redirect( $baseurl.'admin/thankyou.php' );
+		die();
+	}
+}
+
+?>
+
+
+	    <?php if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) { ?>
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -92,7 +93,7 @@
 					</div>
 					<div class="column-one">
 						<a href="<?php echo $baseurl;?>logout.php?user=<?php echo $user["login_system_registrations_user_id"];?>&lang=<?php echo $_GET['lang'];?>" class="logout"><?php echo $lang['dashboard_form_logout'];?></a>
-					</div>		
+					</div>
 				</div>
 			</div>
 			<div class="section">
@@ -117,7 +118,7 @@
 						<label for="sky-tab8" hidden>8</label>
 
 						</br>
-						
+
 						<span><?php echo $lang['section_personal'];?></span>
 						<span><?php echo $lang['section_contact'];?></span>
 						<span><?php echo $lang['section_academic'];?></span>
@@ -127,20 +128,20 @@
 						<span><?php echo $lang['section_docs'];?></span>
 						<span><?php echo $lang['section_payment'];?></span>
 
-						
+
 						<ul>
-							<li class="sky-tab-content-1">					
+							<li class="sky-tab-content-1">
 								<?php include 'sections/personal_details.php'; ?>
 							</li>
-							
+
 							<li class="sky-tab-content-2">
 								<?php include 'sections/contact_details.php'; ?>
 							</li>
-							
+
 							<li class="sky-tab-content-3">
 								<?php include 'sections/academic_details.php'; ?>
 							</li>
-								
+
 							<li class="sky-tab-content-4">
 								<?php include 'sections/workex_details.php'; ?>
 							</li>
@@ -159,8 +160,8 @@
 
 							<li class="sky-tab-content-8">
 								<?php include 'sections/payment_details.php'; ?>
-								
-							</li>			
+
+							</li>
 						</ul>
 					</div>
 					<!--/ tabs -->
@@ -180,14 +181,14 @@
 				</div>
             </div>
 		</div>
-		
+
 		<?php } else { ?>
-		
-		<?php 
-			redirect($baseurl.'login.php?lang='.$_GET['lang'].'');		
-		?>
-		
-		<div class="wrapper"> 
+
+		<?php
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+?>
+
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -206,10 +207,10 @@
 						</div>
 						<div class="column-two">
 							<a href="<?php echo $baseurl;?>logout.php?provider=<?php echo $_GET["provider"];?>&lang=<?php echo $_GET['lang'];?>" class="logout"><?php echo $lang['dashboard_form_logout'];?></a>
-						</div>					
+						</div>
 					</div>
 				</div>
-				
+
 				<div class="copyright">
 					<div class="grid-container">
 						<div class="column-twelve">

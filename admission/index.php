@@ -1,37 +1,39 @@
 <?php
-	
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-	
-	include dirname(__FILE__).'/php/config/config.php';
-	include dirname(__FILE__).'/php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include dirname(__FILE__).'/php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include dirname(__FILE__).'/php/language/en.php';
-	}
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_set_cookie_params( 0, '/', '127.0.0.1' );
+	session_start();
+}
 
-	if($_SESSION['userLogin'] && $_SESSION['userName']){
-				
-		redirect($baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'');
-		
-	}	
-?>  
+include dirname( __FILE__ ).'/php/config/config.php';
+include dirname( __FILE__ ).'/php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include dirname( __FILE__ ).'/php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include dirname( __FILE__ ).'/php/language/en.php';
+}
+
+if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
+
+	redirect( $baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'' );
+
+}
+?>
 <!doctype html>
 <html>
     <head>
 
-        <?php include dirname(__FILE__).'/header.php'; ?>
+        <?php include dirname( __FILE__ ).'/header.php'; ?>
 
     </head>
-	
+
     <body>
-	
-		<div class="wrapper small-wrapper"> 
+
+		<div class="wrapper small-wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -50,9 +52,13 @@
                     <div class="column-twelve">
 						<h2><?php echo $lang['index_title'];?></h2>
 					</div>
-					<div class="column-twelve" style="color: red; font-weight: bold;">
-						<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
-					</div>
+					<?php
+if ( $registration_closed == 'Y' ) {
+	echo '<div class="column-twelve" style="color: red; font-weight: bold;">
+								<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
+							</div>';
+}
+?>
 				</div>
 			</div>
 			<div class="section">

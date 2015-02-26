@@ -1,37 +1,38 @@
 <?php
-    
-	include '../php/csrf_protection/csrf-token.php';
-	include '../php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include '../php/config/config.php';
-	include '../php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include '../php/csrf_protection/csrf-token.php';
+include '../php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include '../php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include '../php/language/en.php';
-	}
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
 
-	if(!$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset($_SESSION['userName'])){
-				
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-			
-	} else {					
-		$time = time();
-								
-		if($time > $_SESSION['expire']){
-			session_destroy();
-			timeout();
-			exit(0);
-		}		
+include '../php/config/config.php';
+include '../php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include '../php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include '../php/language/en.php';
+}
+
+if ( !$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset( $_SESSION['userName'] ) ) {
+
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+
+} else {
+	$time = time();
+
+	if ( $time > $_SESSION['expire'] ) {
+		session_destroy();
+		timeout();
+		exit( 0 );
 	}
-	
+}
+
 ?>
 <!doctype html>
 <html>
@@ -40,25 +41,25 @@
         <?php include '../header.php'; ?>
 
     </head>
-	
+
     <body>
 
-    	<?php 
-		
-			$userInfo = mysql_query("SELECT login_system_registrations_user_id,application_status FROM ".$mysqltable_name_1." WHERE login_system_registrations_user_id = '".mysql_real_escape_string($_SESSION['userLogin'])."'");
-			$userQuery = mysql_num_rows($userInfo);
-						
-			$user = mysql_fetch_array($userInfo);
+    	<?php
 
-			if($user["application_status"] != 'Completed') {
-		    	redirect($baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'');
-		    	die();
-    		}
-		
-		?>
+$userInfo = mysql_query( "SELECT login_system_registrations_user_id,application_status FROM ".$mysqltable_name_1." WHERE login_system_registrations_user_id = '".mysql_real_escape_string( $_SESSION['userLogin'] )."'" );
+$userQuery = mysql_num_rows( $userInfo );
 
-	    <?php if($_SESSION['userLogin'] && $_SESSION['userName']){ ?>
-		<div class="wrapper"> 
+$user = mysql_fetch_array( $userInfo );
+
+if ( $user["application_status"] != 'Completed' ) {
+	redirect( $baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'' );
+	die();
+}
+
+?>
+
+	    <?php if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) { ?>
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -74,9 +75,13 @@
 			    	<div class="column-twelve">
 						<h4><?php echo $lang['dashboard_title'];?></h4>
 					</div>
-					<div class="column-twelve" style="color: red; font-weight: bold;">
-						<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
-					</div>
+					<?php
+	if ( $registration_closed == 'Y' ) {
+		echo '<div class="column-twelve" style="color: red; font-weight: bold;">
+							<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
+						</div>';
+	}
+?>
                     <div class="column-eleven" style="text-align: left;">
 						<?php echo $lang['application_id'];?><?php echo $_SESSION['userName'];?>
 					</div>
@@ -119,12 +124,11 @@
 				</div>
             </div>
 		</div>
-		
-		<?php } else { ?>
-		
-		<?php 
-			redirect($baseurl.'login.php?lang='.$_GET['lang'].'');		
-		 } ?>
+
+		<?php } else {
+
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+} ?>
 
     </body>
 </html>

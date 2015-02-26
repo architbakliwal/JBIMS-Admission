@@ -1,42 +1,43 @@
 <?php
+$some_name = session_name( "JBIMSAdmission" );
 session_start();
 
-	include '../php/csrf_protection/csrf-token.php';
-	include '../php/csrf_protection/csrf-class.php';
-    
-	include '../php/config/config.php';
-	include '../php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include '../php/csrf_protection/csrf-token.php';
+include '../php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include '../php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include '../php/language/en.php';
-	}
+include '../php/config/config.php';
+include '../php/config/functions.php';
 
-	if(!$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset($_SESSION['userName'])){
-				
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-			
-	} else {					
-		$time = time();
-								
-		if($time > $_SESSION['expire']){
-			session_destroy();
-			timeout();
-			exit(0);
-		}		
-	}
-	
-	$_SESSION['start'] = time();
-	$_SESSION['expire'] = $_SESSION['start'] + (60*60);
+$language = array( 'en' => 'en', 'pt' => 'pt' );
 
-	if(strlen(trim($_SESSION['userName'])) == 0) {
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include '../php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include '../php/language/en.php';
+}
+
+if ( !$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset( $_SESSION['userName'] ) ) {
+
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+
+} else {
+	$time = time();
+
+	if ( $time > $_SESSION['expire'] ) {
 		session_destroy();
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-		die();
+		timeout();
+		exit( 0 );
 	}
+}
+
+$_SESSION['start'] = time();
+$_SESSION['expire'] = $_SESSION['start'] + ( 60*60 );
+
+if ( strlen( trim( $_SESSION['userName'] ) ) == 0 ) {
+	session_destroy();
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+	die();
+}
 
 ?>
 <!doctype html>
@@ -46,11 +47,11 @@ session_start();
         <?php include '../header.php'; ?>
 
     </head>
-	
+
     <body>
 
-	    <?php if($_SESSION['userLogin'] && $_SESSION['userName']){ ?>
-		<div class="wrapper"> 
+	    <?php if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) { ?>
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -69,7 +70,7 @@ session_start();
                     <div class="column-twelve" style="text-align: left;">
 						<?php echo $lang['application_id'];?><?php echo $_SESSION['userName'];?>
 					</div>
-					
+
 				</div>
 			</div>
 			<div class="section">
@@ -92,8 +93,8 @@ session_start();
 																	<input type="radio" name="iagree" class="" value="Yes" id="Yes">
 																	<span class="label space-right">I hereby declare that the information given in this application form is complete, true and correct to best of my knowledge. If admitted, I agree to comply with the rules of the institute.</span>
 																</label>
-															</div>	
-														</div>		
+															</div>
+														</div>
 													</div>
 													<div class="column-twelve" style="margin:30px;">
 														<div class="column-two">
@@ -129,12 +130,12 @@ session_start();
 				</div>
             </div>
 		</div>
-		
+
 		<?php } else { ?>
-		
-		<?php 
-			redirect($baseurl.'login.php?lang='.$_GET['lang'].'');		
-		 } ?>
+
+		<?php
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+} ?>
 
     </body>
 </html>

@@ -1,36 +1,37 @@
 <?php
 
-    include dirname(__FILE__).'/php/csrf_protection/csrf-token.php';
-	include dirname(__FILE__).'/php/csrf_protection/csrf-class.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-token.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include dirname(__FILE__).'/php/config/config.php';
-	include dirname(__FILE__).'/php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include dirname(__FILE__).'/php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include dirname(__FILE__).'/php/language/en.php';
-	}
-	
-	if($_SESSION['userLogin'] && $_SESSION['userName']){
-		redirect($baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'');
-	}
+include dirname( __FILE__ ).'/php/config/config.php';
+include dirname( __FILE__ ).'/php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include dirname( __FILE__ ).'/php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include dirname( __FILE__ ).'/php/language/en.php';
+}
+
+if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
+	redirect( $baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'' );
+}
 
 ?>
 <!doctype html>
 <html>
     <head>
 
-        <?php include dirname(__FILE__).'/header.php'; ?>
+        <?php include dirname( __FILE__ ).'/header.php'; ?>
 
     </head>
-	
+
     <body>
 
 		<div class="container container-small">
@@ -52,19 +53,19 @@
 						</div>
 						<div class="column-twelve">
 							<h4><i class="icon-lock-2"></i><?php echo $lang['form_login_title'];?></h4>
-						</div>							
+						</div>
 					</div>
 				</div>
 				<div class="section">
 					<form method="post" action="<?php echo $baseurl;?>php/processor-login.php?lang=<?php echo $_GET['lang'];?>" id="login-form">
 						<fieldset>
 							<div class="grid-container">
-								<div class="column-twelve">												
-									<?php if($error){echo $error;} else {echo '<div id="login-message"></div>';}?>
+								<div class="column-twelve">
+									<?php if ( $error ) {echo $error;} else {echo '<div id="login-message"></div>';}?>
 								</div>
 								<div class="column-twelve">
 									<div class="input-group">
-										<?php echo CSRF::make('login-form')->protect();?>                                     
+										<?php echo CSRF::make( 'login-form' )->protect();?>
 									</div>
 								</div>
 								<div class="column-twelve">
@@ -81,7 +82,7 @@
 										</label>
 								    </div>
 								</div>
-								<?php if($captcha == true){ ?>
+								<?php if ( $captcha == true ) { ?>
 								<div class="column-six">
                                     <div class="captcha-group">
                                         <div class="captcha center">
@@ -90,7 +91,7 @@
                                     </div>
                                 </div>
 								<div class="column-six">
-                                    <div class="captcha-group">												
+                                    <div class="captcha-group">
                                         <label for="captcha" class="group label-captcha">
 									        <input type="text" name="captcha" class="captcha center" id="captcha" maxlength="6" placeholder="<?php echo $lang['form_login_placeholder_captcha'];?>">
 										</label>
@@ -103,7 +104,7 @@
 							</div>
 						</fieldset>
 					</form>
-				</div>	
+				</div>
 				<div class="footer">
 					<div class="grid-container">
 						<div class="column-twelve">

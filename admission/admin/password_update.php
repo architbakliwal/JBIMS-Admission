@@ -1,37 +1,38 @@
 <?php
-    
-	include '../php/csrf_protection/csrf-token.php';
-	include '../php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include '../php/config/config.php';
-	include '../php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include '../php/csrf_protection/csrf-token.php';
+include '../php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include '../php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include '../php/language/en.php';
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
+
+include '../php/config/config.php';
+include '../php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include '../php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include '../php/language/en.php';
+}
+
+if ( !$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset( $_SESSION['userName'] ) ) {
+
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+
+} else {
+	$time = time();
+
+	if ( $time > $_SESSION['expire'] ) {
+		session_destroy();
+		timeout();
+		exit( 0 );
 	}
-	
-	if(!$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset($_SESSION['userName'])){
-				
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-			
-	} else {					
-		$time = time();
-								
-		if($time > $_SESSION['expire']){
-			session_destroy();
-			timeout();
-			exit(0);
-		}		
-	}
-	
+}
+
 ?>
 <!doctype html>
 <html>
@@ -40,19 +41,19 @@
         <?php include '../header.php'; ?>
 
     </head>
-	
+
     <body>
-	
-	    <?php 
-		
-			$userInfo = mysql_query("SELECT login_system_registrations_user_id FROM ".$mysqltable_name_1." WHERE login_system_registrations_user_id = '".mysql_real_escape_string($_SESSION['userLogin'])."'");
-			$userQuery = mysql_num_rows($userInfo);
-						
-			$user = mysql_fetch_array($userInfo);
-		
-		?>
-	
-		<div class="wrapper"> 
+
+	    <?php
+
+$userInfo = mysql_query( "SELECT login_system_registrations_user_id FROM ".$mysqltable_name_1." WHERE login_system_registrations_user_id = '".mysql_real_escape_string( $_SESSION['userLogin'] )."'" );
+$userQuery = mysql_num_rows( $userInfo );
+
+$user = mysql_fetch_array( $userInfo );
+
+?>
+
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -74,7 +75,7 @@
 						</div>
 						<div class="column-one">
 							<a href="<?php echo $baseurl;?>logout.php?user=<?php echo $user["login_system_registrations_user_id"];?>&lang=<?php echo $_GET['lang'];?>"><?php echo $lang['dashboard_form_logout'];?></a>
-						</div>					
+						</div>
 					</div>
 				</div>
 				<div class="description">
@@ -96,7 +97,7 @@
 								</div>
 								<div class="column-twelve">
 									<div class="input-group">
-										<?php echo CSRF::make('update-password-form')->protect();?>                                     
+										<?php echo CSRF::make( 'update-password-form' )->protect();?>
 									</div>
 								</div>
 								<div class="column-twelve">
@@ -131,6 +132,6 @@
 				</div>
 			</div>
 		</div>
-		
+
     </body>
 </html>

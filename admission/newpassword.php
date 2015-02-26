@@ -1,64 +1,65 @@
 <?php
-    
-	include dirname(__FILE__).'/php/csrf_protection/csrf-token.php';
-	include dirname(__FILE__).'/php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include dirname(__FILE__).'/php/config/config.php';
-	include dirname(__FILE__).'/php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-token.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include dirname(__FILE__).'/php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include dirname(__FILE__).'/php/language/en.php';
-	}
-	
-	if(!$_GET["email"] && !$_GET["token"]){
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-	} 
-	
-	if($_GET['provider']){	
-		if ($social == true){
-		    if(!$_SESSION['loginProviderDisplayName'] && !$_SESSION['loginProviderID']){
-				
-				redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-				
-			} else {					
-				$time = time();
-									
-				if($time > $_SESSION['expire']){
-					session_destroy();
-					redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-				}		
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
+
+include dirname( __FILE__ ).'/php/config/config.php';
+include dirname( __FILE__ ).'/php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include dirname( __FILE__ ).'/php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include dirname( __FILE__ ).'/php/language/en.php';
+}
+
+if ( !$_GET["email"] && !$_GET["token"] ) {
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+}
+
+if ( $_GET['provider'] ) {
+	if ( $social == true ) {
+		if ( !$_SESSION['loginProviderDisplayName'] && !$_SESSION['loginProviderID'] ) {
+
+			redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+
+		} else {
+			$time = time();
+
+			if ( $time > $_SESSION['expire'] ) {
+				session_destroy();
+				timeout();
 			}
-		}  
+		}
 	}
+}
 ?>
 <!doctype html>
 <html>
     <head>
 
-        <?php include dirname(__FILE__).'/header.php'; ?>
+        <?php include dirname( __FILE__ ).'/header.php'; ?>
 
     </head>
-	
+
     <body>
-	
-		<?php 
-						
-			$useremail = strip_tags(trim($_GET["email"]));
-			$passtoken = strip_tags(trim($_GET["token"]));
-															
-			$finaluseremail = htmlspecialchars($useremail, ENT_QUOTES, 'UTF-8');
-			$finalpasstoken = htmlspecialchars($passtoken, ENT_QUOTES, 'UTF-8');
-	
-		?>	
-	
+
+		<?php
+
+$useremail = strip_tags( trim( $_GET["email"] ) );
+$passtoken = strip_tags( trim( $_GET["token"] ) );
+
+$finaluseremail = htmlspecialchars( $useremail, ENT_QUOTES, 'UTF-8' );
+$finalpasstoken = htmlspecialchars( $passtoken, ENT_QUOTES, 'UTF-8' );
+
+?>
+
 		<div class="container">
 		    <div class="form-bar" id="newpassword">
 				<div class="top-bar bar-green"></div>
@@ -78,7 +79,7 @@
 						</div>
 						<div class="column-twelve">
 							<h4><i class="icon-key"></i><?php echo $lang['form_new_password_title'];?></h4>
-						</div>							
+						</div>
 					</div>
 				</div>
 				<div class="section">
@@ -90,7 +91,7 @@
 								</div>
 								<div class="column-twelve">
 									<div class="input-group">
-										<?php echo CSRF::make('newpassword-form')->protect();?>                                     
+										<?php echo CSRF::make( 'newpassword-form' )->protect();?>
 									</div>
 								</div>
 								<div class="column-twelve">
@@ -115,7 +116,7 @@
 							</div>
 						</fieldset>
 					</form>
-				</div>	
+				</div>
 				<div class="footer">
 					<div class="grid-container">
 						<div class="column-twelve">
@@ -125,6 +126,6 @@
 				</div>
 			</div>
 		</div>
-		
+
     </body>
 </html>
