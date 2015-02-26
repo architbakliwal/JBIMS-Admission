@@ -1,9 +1,7 @@
 <?php
 	
 	if(!isset($_SESSION)){
-    	$some_name = session_name("JBIMSAdmission");
-		session_set_cookie_params(0, '/', '127.0.0.1');
-		session_start();
+    	session_start();
 	}
 	
 	include dirname(__FILE__).'/php/config/config.php';
@@ -52,13 +50,9 @@
                     <div class="column-twelve">
 						<h2><?php echo $lang['index_title'];?></h2>
 					</div>
-					<?php
-						if($registration_closed == 'Y') {
-							echo '<div class="column-twelve" style="color: red; font-weight: bold;">
-								<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
-							</div>';
-						}
-					?>
+					<div class="column-twelve" style="color: red; font-weight: bold;">
+						<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
+					</div>
 				</div>
 			</div>
 			<div class="section">

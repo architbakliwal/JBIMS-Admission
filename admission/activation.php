@@ -30,7 +30,7 @@
 									
 				if($time > $_SESSION['expire']){
 					session_destroy();
-					timeout();
+					redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
 				}		
 			}
 		}

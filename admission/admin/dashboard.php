@@ -4,7 +4,6 @@
 	include '../php/csrf_protection/csrf-class.php';
 
 	if(!isset($_SESSION)){
-		$some_name = session_name("JBIMSAdmission");
     	session_start();
 	}
     

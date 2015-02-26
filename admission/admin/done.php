@@ -74,13 +74,9 @@
 			    	<div class="column-twelve">
 						<h4><?php echo $lang['dashboard_title'];?></h4>
 					</div>
-					<?php
-						if($registration_closed == 'Y') {
-							echo '<div class="column-twelve" style="color: red; font-weight: bold;">
-							<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
-						</div>';
-						}
-					?>
+					<div class="column-twelve" style="color: red; font-weight: bold;">
+						<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
+					</div>
                     <div class="column-eleven" style="text-align: left;">
 						<?php echo $lang['application_id'];?><?php echo $_SESSION['userName'];?>
 					</div>
@@ -124,8 +120,9 @@
             </div>
 		</div>
 		
-		<?php } else { 
-			
+		<?php } else { ?>
+		
+		<?php 
 			redirect($baseurl.'login.php?lang='.$_GET['lang'].'');		
 		 } ?>
 
