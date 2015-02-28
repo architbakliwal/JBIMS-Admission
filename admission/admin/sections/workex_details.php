@@ -165,14 +165,14 @@
 										<div class="column-four">
 											<div class="input-group-right irequire">
 											    <label for="workstarted" class="group label-input">
-				                                    <input type="text" id="workstarted" name="workstarted" class="input-right workstarted" placeholder="Started work in (MM/YYYY)">										
-												</label>
+				                                    <input type="text" id="workstarted" name="workstarted" class="input-right workstarted" placeholder="Started work in (YYYY-MM-DD">
+				                                </label>
 										    </div>
 										</div>
 										<div class="column-four">
 											<div class="input-group-right irequire">
 											    <label for="workcompleted" class="group label-input">
-				                                    <input type="text" id="workcompleted" name="workcompleted" class="input-right workcompleted" placeholder="Completed work in (MM/YYYY)">										
+				                                    <input type="text" id="workcompleted" name="workcompleted" class="input-right workcompleted" placeholder="Completed work in (YYYY-MM-DD)">
 												</label>
 										    </div>
 										</div>
@@ -200,7 +200,7 @@
 										<div class="column-eight">
 											<div class="textarea-group irequire">
 											    <label for="rolesandresponsibility" class="group label-textarea">
-					                                <textarea rows="5" id="rolesandresponsibility" name="rolesandresponsibility" class="textarea no-resisable" placeholder="Please give a brief description of your role and responsibilities in the organisation (Upto 100 words max)"></textarea>
+					                                <textarea rows="5" id="rolesandresponsibility" name="rolesandresponsibility" class="textarea no-resisable" placeholder="Please give a brief description of your role and responsibilities in the organisation (Max 200 words)"></textarea>
 												</label>
 										    </div>
 										</div>

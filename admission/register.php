@@ -84,14 +84,14 @@ if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
 								<div class="column-twelve">
 									<div class="box irequire">
 									    <div class="box-header">
-										    <h4><?php echo $lang['program_option_1'];?></h4>
+										    <h4>Select program you want to apply for...</h4>
 										</div>
 										<div class="box-section">
 											<div class="column-six">
 												<div class="checkbox-group space-bottom">
 													<label for="program1" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MMS" id="program1">
-														<span class="label space-right"><?php echo $lang['program_option_2'];?></span>
+														<span class="label space-right">Masters in Management Studies (MMS)</span>
 													</label>
 												</div>
 											</div>
@@ -99,7 +99,7 @@ if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
 												<div class="checkbox-group space-bottom">
 													<label for="program2" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MMM" id="program2" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_3'];?></span>
+														<span class="label space-right">(Part-time)Masters in Marketing management (MMM)</span>
 													</label>
 												</div>
 											</div>
@@ -107,7 +107,7 @@ if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
 												<div class="checkbox-group space-bottom">
 													<label for="program3" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MIM" id="program3" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_4'];?></span>
+														<span class="label space-right">(Part-time)Masters in Information management (MIM)</span>
 													</label>
 												</div>
 											</div>
@@ -115,7 +115,7 @@ if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
 												<div class="checkbox-group space-bottom">
 													<label for="program4" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MHRDM" id="program4" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_5'];?></span>
+														<span class="label space-right">(Part-time)Masters in Human Resource Development & Management (MHRDM)</span>
 													</label>
 												</div>
 											</div>
@@ -123,7 +123,7 @@ if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
 												<div class="checkbox-group space-bottom">
 													<label for="program5" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MFM" id="program5" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_6'];?></span>
+														<span class="label space-right">(Part-time)Masters in Financial Management (MFM)</span>
 													</label>
 												</div>
 											</div>
@@ -131,7 +131,7 @@ if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
 												<div class="checkbox-group space-bottom">
 													<label for="program6" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MSc Finance" id="program6">
-														<span class="label space-right"><?php echo $lang['program_option_7'];?></span>
+														<span class="label space-right">MSc Finance</span>
 													</label>
 												</div>
 											</div>

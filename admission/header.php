@@ -40,5 +40,6 @@
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/jquery-cloneya.js"></script>
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/scripts.js"></script>
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/validations.js"></script>
+	<script type="text/javascript" src="<?php echo $baseurl;?>js/jquery.ui.datepicker.validation.min.js"></script>
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/jquery.blockUI.js"></script>
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/jquery.loadJSON.js"></script>

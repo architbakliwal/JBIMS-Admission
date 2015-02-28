@@ -69,7 +69,7 @@
 							<div class="textarea-group irequire">
 							    <label for="refreeknowing" class="group label-textarea">
 							    	<h4 style="text-align: left; margin: 20px 0px;">In what capacity does he/she know you?</h4>
-	                                <textarea rows="5" id="refreeknowing" name="refreeknowing" class="textarea no-resisable" placeholder="Please state your relation with the referee (150 characters max)"></textarea>
+	                                <textarea rows="5" id="refreeknowing" name="refreeknowing" class="textarea no-resisable" placeholder="Please state your relation with the referee (Max 200 words)"></textarea>
 								</label>
 						    </div>
 						</div>
