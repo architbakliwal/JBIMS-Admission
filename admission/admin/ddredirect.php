@@ -109,7 +109,7 @@ if ( strlen( trim( $_SESSION['userName'] ) ) == 0 ) {
 													</div>
 													<div class="column-twelve">
 														<div class="terms">
-															<p><a href="http://jbims.edu/admission/terms.php" target="_blank" style="padding:0px;">Terms & Conditions</a></p>
+															<p><a href="<?php echo $baseurl;?>terms.php" target="_blank" style="padding:0px;">Terms & Conditions</a></p>
 														</div>
 													</div>
 											    </div>

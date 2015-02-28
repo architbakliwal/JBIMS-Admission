@@ -85,7 +85,7 @@ if ( $mysql == true ) {
 
 
 } else {
-	redirect( 'http://jbims.edu/admission/' );
+	redirect( $baseurl );
 }
 
 
@@ -116,7 +116,7 @@ $oPGReserveData = new PGReserveData();
 
 
 
-$oMerchant->setMerchantDetails( "00012849", "00012849", "00012849", "193.545.34.33", rand()."", "Ord123", "http://jbims.edu/admission/payment/SFAResponse.php", "POST", "INR", "INV123", "req.Sale", $applicationfees, "", "Ext1", "true", "Ext3", "Ext4", "Ext5" );
+$oMerchant->setMerchantDetails( "00012849", "00012849", "00012849", "193.545.34.33", rand()."", "Ord123", $baseurl."payment/SFAResponse.php", "POST", "INR", "INV123", "req.Sale", $applicationfees, "", "Ext1", "true", "Ext3", "Ext4", "Ext5" );
 
 $oBTA->setAddressDetails ( "CID", "Tester", "JBIMS", "Mumbai", "Maharashtra", "Test", "Test", "Test", "IND", "web@jbims.edu" );
 
