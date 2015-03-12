@@ -102,8 +102,8 @@
 			<div class="section">
 				<div class="grid-container">
 					<div class="form">
-						<div class="section inner_section" id="academic-clone">
-							<form method="post" action="<?php echo $baseurl;?>php/processor-cet.php?lang=<?php echo $_GET['lang'];?>" id="section_done">
+						<div class="section inner_section">
+							<form method="post" action="<?php echo $baseurl;?>php/processor-cet.php?lang=<?php echo $_GET['lang'];?>" id="section_done_cet">
 								<fieldset>
 									<div class="grid-container">
 										<div class="column-twelve">
@@ -145,7 +145,9 @@
 													<div class="column-twelve" style="margin:0px; font-size: 20px;font-weight: bold;">
 														<a href="<?php echo $baseurl;?>secure/application/document/go/document.php" style="color: blue; text-decoration: underline;">Download Application Form</a>
 													</div>
+
 													<?php } ?>
+
 											    </div>
 											</div>
 										</div>

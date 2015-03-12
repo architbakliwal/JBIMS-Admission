@@ -58,6 +58,7 @@
 	$row_array10 = array();
 	$row_array11 = array();
 	$row_array12 = array();
+	$row_array13 = array();
 
 	function htmldecode($value) {
 		return htmlspecialchars_decode($value, ENT_QUOTES);
@@ -520,6 +521,27 @@
 
 		//push the values in the array
         array_push($json_response,$row_array12);
+
+
+
+
+        $cet = "SELECT * FROM  `users_cet_score_details` WHERE application_id ='" . $finalapplicationid ."'";
+
+		$selectcet = mysql_query($cet);
+
+		if(! $selectcet )
+		{
+		  die('Could not enter data: ' . mysql_error());
+		}
+
+	    while ($row = mysql_fetch_array($selectcet, MYSQL_ASSOC)) {
+	        $row_array13['cetrollnumber'] = $row['cet_roll_number'];
+			$row_array13['cetmarks'] = $row['cet_marks'];
+			$row_array13['cetpercentile'] = $row['cet_percentile'];
+	    }
+
+	    //push the values in the array
+        array_push($json_response,$row_array13);
 
 
 

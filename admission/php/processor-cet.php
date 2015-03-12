@@ -33,31 +33,35 @@
 	}
 		
 	$applicationid = strip_tags(trim($_SESSION['userName']));
-	$catapplicationid = strip_tags(trim($_POST["catapplicationid"]));
-	$catexamdate = strip_tags(trim($_POST["catexamdate"]));
+	$cetrollnumber = strip_tags(trim($_POST["cetrollnumber"]));
+	$cetmarks = strip_tags(trim($_POST["cetmarks"]));
+	$cetpercentile = strip_tags(trim($_POST["cetpercentile"]));
 
 
 	$finalapplicationid = htmlspecialchars($applicationid, ENT_QUOTES, 'UTF-8');
-	$finalcatapplicationid = htmlspecialchars($catapplicationid, ENT_QUOTES, 'UTF-8');
-	$finalcatexamdate = htmlspecialchars($catexamdate, ENT_QUOTES, 'UTF-8');
+	$finalcetrollnumber = htmlspecialchars($cetrollnumber, ENT_QUOTES, 'UTF-8');
+	$finalcetmarks = htmlspecialchars($cetmarks, ENT_QUOTES, 'UTF-8');
+	$finalcetpercentile = htmlspecialchars($cetpercentile, ENT_QUOTES, 'UTF-8');
 
 	
 
 	if ($mysql == true){
-		$sqltestcat = "INSERT INTO `jbims_admission`.`users_cet_score_details` (`application_id`, `cat_application_id`, `cat_exam_date`) VALUES (
+		$sqltestcet = "INSERT INTO `jbims_admission`.`users_cet_score_details` (`application_id`, `cet_roll_number`, `cet_marks`, 'cet_percentile') VALUES (
 			'".mysql_real_escape_string($finalapplicationid)."',
-			'".mysql_real_escape_string($finalcatapplicationid)."',
-			'".mysql_real_escape_string($finalcatexamdate)."'
+			'".mysql_real_escape_string($finalcetrollnumber)."',
+			'".mysql_real_escape_string($finalcetmarks)."',
+			'".mysql_real_escape_string($finalcetpercentile)."'
 			) 
 		ON DUPLICATE KEY 
 		UPDATE 
-		cat_application_id = VALUES(cat_application_id),
-		cat_exam_date = VALUES(cat_exam_date)
+		cet_roll_number = VALUES(cet_roll_number),
+		cet_marks = VALUES(cet_marks),
+		cet_percentile = VALUES(cet_percentile),
 		;";
 
-		$inserttestcat = mysql_query($sqltestcat);
+		$inserttestcet = mysql_query($sqltestcet);
 
-		if(! $inserttestcat )
+		if(! $inserttestcet )
 		{
 		  die('Could not enter data: ' . mysql_error());
 		}
