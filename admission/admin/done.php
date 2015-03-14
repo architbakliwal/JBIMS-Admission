@@ -142,12 +142,12 @@
 													<div class="column-two">
 														<button type="button" id="cet-save-button" class="button button-large button-blue space">Save</button>
 													</div>
-													<div class="column-twelve" style="margin:0px; font-size: 20px;font-weight: bold;">
-														<a href="<?php echo $baseurl;?>secure/application/document/go/document.php" style="color: blue; text-decoration: underline;">Download Application Form</a>
-													</div>
 
 													<?php } ?>
 
+													<div class="column-twelve" style="margin:0px; font-size: 20px;font-weight: bold;">
+														<a href="<?php echo $baseurl;?>secure/application/document/go/document.php" style="color: blue; text-decoration: underline;">Download Application Form</a>
+													</div>
 											    </div>
 											</div>
 										</div>
