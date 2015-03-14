@@ -4,6 +4,30 @@
 	:: CONFIG SETTINGS
 	-------------------------------------------------- */
 
+	if($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
+		$hostname_Connection = "127.0.0.1";
+	    $database_Connection = "jbims_admission";
+	    $username_Connection = "root";
+	    $password_Connection = "";
+	    $baseurl = 'http://127.0.0.1/JBIMS/';
+	} else {
+		$hostname_Connection = "localhost";
+	    $database_Connection = "jbims_admission";
+	    $username_Connection = "admissions";
+	    $password_Connection = "pass@123";
+
+	    // Enter your URL here without http:// only domain!
+		$url = 'jbims.edu';
+		
+		if ($_SERVER['SERVER_NAME'] == $url) {
+		    // Enter your BASEURL here without WWW!
+			$baseurl = 'http://jbims.edu/admission/';
+		} else {
+		    // Enter your BASEURL here with WWW!
+			$baseurl = 'http://www.jbims.edu/admission/';
+		}
+	}
+
 	error_reporting(0);
 
 	// error_reporting(E_ALL & ~E_NOTICE);
@@ -34,17 +58,6 @@
 	date_default_timezone_set('Asia/Kolkata');
 	
 	$localtime = date("l jS \of F Y h:i:s A");	
-
-	// Enter your URL here without http:// only domain!
-	$url = 'jbims.edu';
-	
-	if ($_SERVER['SERVER_NAME'] == $url) {
-	    // Enter your BASEURL here without WWW!
-		$baseurl = 'http://jbims.edu/admission/';
-	} else {
-	    // Enter your BASEURL here with WWW!
-		$baseurl = 'http://www.jbims.edu/admission/';
-	}
 	
 	// Enter your Website here!
 	$website = 'http://www.jbims.edu/';
@@ -76,14 +89,12 @@
 	$mysqltable_name_4   = "login_system_email_activation";
 	$mysqltable_name_5   = "login_system_register_social_networks";
 
-    $hostname_Connection = "localhost";
-    $database_Connection = "jbims_admission";
-    $username_Connection = "admissions";
-    $password_Connection = "pass@123";
+    
 
     if ($mysql) {
         $connection = mysql_connect($hostname_Connection, $username_Connection, $password_Connection) or die ('<div class="error-message"><i class="icon-close"></i>Failed to connect to MySQL '.mysql_error().'</div>');
         $database = mysql_select_db ($database_Connection, $connection) or die ('<div class="error-message"><i class="icon-close"></i>Failed to connect to MySQL '.mysql_error().'</div>');
+
         $sqlconfig = "SELECT * FROM  `admission_config`";
 
 		$selectconfig = mysql_query($sqlconfig);
