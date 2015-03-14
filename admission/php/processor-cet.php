@@ -46,7 +46,7 @@
 	
 
 	if ($mysql == true){
-		$sqltestcet = "INSERT INTO `jbims_admission`.`users_cet_score_details` (`application_id`, `cet_roll_number`, `cet_marks`, 'cet_percentile') VALUES (
+		$sqltestcet = "INSERT INTO `jbims_admission`.`users_cet_score_details` (`application_id`, `cet_roll_number`, `cet_marks`, `cet_percentile`) VALUES (
 			'".mysql_real_escape_string($finalapplicationid)."',
 			'".mysql_real_escape_string($finalcetrollnumber)."',
 			'".mysql_real_escape_string($finalcetmarks)."',
@@ -56,7 +56,7 @@
 		UPDATE 
 		cet_roll_number = VALUES(cet_roll_number),
 		cet_marks = VALUES(cet_marks),
-		cet_percentile = VALUES(cet_percentile),
+		cet_percentile = VALUES(cet_percentile)
 		;";
 
 		$inserttestcet = mysql_query($sqltestcet);

@@ -891,13 +891,16 @@ jQuery.noConflict()(function($) {
                     $.blockUI();
                 },
                 success: function(responseText, statusText, xhr, $form) {
-                    checktimeout(responseText);
-                    $.unblockUI();
-                    if ($("#section_done_cet").valid()) {
-                        alert("details saved successfully");
-                    } else {
-
+                    if (responseText === 'success') {
+                        checktimeout(responseText);
+                        $.unblockUI();
+                        if ($("#section_done_cet").valid()) {
+                            alert("Details saved successfully!!");
+                        } else {
+                            alert("All fields are required.");
+                        }
                     }
+
                 },
             });
 
