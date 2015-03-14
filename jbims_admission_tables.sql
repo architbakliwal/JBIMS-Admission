@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Feb 28, 2015 at 12:44 PM
+-- Generation Time: Mar 14, 2015 at 06:09 AM
 -- Server version: 5.5.37
 -- PHP Version: 5.3.29
 
@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS `added_work_experience_details` (
 
 CREATE TABLE IF NOT EXISTS `admission_config` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
-  `registration_closed` varchar(255) NOT NULL DEFAULT 'N',
+  `registration_closed` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'N',
+  `mh_cet_open` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'N',
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -166,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `login_system_forgot_password` (
   `login_system_forgot_password_attempts` int(10) NOT NULL,
   `login_system_forgot_password_blocked_time` datetime DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`login_system_forgot_password_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2437 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2547 ;
 
 -- --------------------------------------------------------
 
@@ -183,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `login_system_login_attempts` (
   `login_system_login_attempts_blocked_time` datetime DEFAULT '0000-00-00 00:00:00',
   `login_system_login_attempts_username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`login_system_login_attempts_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15318 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15321 ;
 
 -- --------------------------------------------------------
 
@@ -318,6 +319,20 @@ CREATE TABLE IF NOT EXISTS `users_cat_score_details` (
   `cat_application_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cat_exam_date` date DEFAULT NULL,
   PRIMARY KEY (`application_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_cet_score_details`
+--
+
+CREATE TABLE IF NOT EXISTS `users_cet_score_details` (
+  `application_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cet_roll_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cet_marks` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cet_percentile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `application_id` (`application_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
