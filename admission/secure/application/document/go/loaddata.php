@@ -528,6 +528,22 @@
 		// $cat_exam_date = date("d-M-Y", strtotime($cat_exam_date));
 
     }
+    
+
+    $cet = "SELECT * FROM  `users_cet_score_details` WHERE application_id ='" . $finalapplicationid ."'";
+
+	$selectcet = mysql_query($cet);
+
+	if(! $selectcet )
+	{
+	  die('Could not enter data: ' . mysql_error());
+	}
+
+    while ($row = mysql_fetch_array($selectcet, MYSQL_ASSOC)) {
+        $cet_roll_number = $row['cet_roll_number'];
+		$cet_marks = $row['cet_marks'];
+		$cet_percentile = $row['cet_percentile'];
+    }
 
 
     $gre = "SELECT * FROM  `users_gre_score_details` WHERE application_id ='" . $finalapplicationid ."'";

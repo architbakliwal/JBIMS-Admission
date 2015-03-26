@@ -700,7 +700,14 @@ $tbl = <<<EOD
         <td colspan="4" class="specialrow">MH-CET Details</td>
     </tr>
     <tr nobr="true">
-        <td colspan="4">You will be contacted on your registered email id for MH-CET registration details in January.</td>
+        <td class="boldstyle">MH-CET Roll Number:</td>
+        <td colspan="3">$cet_roll_number</td>
+    </tr>
+    <tr nobr="true">
+        <td class="boldstyle">Overall marks scored:</td>
+        <td>$cet_marks</td>
+        <td class="boldstyle">Overall Percentile:</td>
+        <td>$cet_percentile</td>
     </tr>
     <tr nobr="true">
         <td colspan="4" class="specialrow">GRE Details</td>

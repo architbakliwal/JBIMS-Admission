@@ -20,6 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $baseurl;?>css/tooltipster.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $baseurl;?>css/responsive.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $baseurl;?>css/jquery-ui-1.10.4.custom.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $baseurl;?>css/sweet-alert.css">
 
 	<!-- Font Link -->
 
@@ -42,3 +43,4 @@
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/validations.js"></script>
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/jquery.blockUI.js"></script>
 	<script type="text/javascript" src="<?php echo $baseurl;?>js/jquery.loadJSON.js"></script>
+	<script type="text/javascript" src="<?php echo $baseurl;?>js/sweet-alert.min.js"></script>

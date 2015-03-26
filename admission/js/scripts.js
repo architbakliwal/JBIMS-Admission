@@ -895,9 +895,19 @@ jQuery.noConflict()(function($) {
                         checktimeout(responseText);
                         $.unblockUI();
                         if ($("#section_done_cet").valid()) {
-                            alert("Details saved successfully!!");
+                            swal({
+                                title: "Success!",
+                                text: "Details saved successfully. Download your PDF.",
+                                type: "success",
+                                animation: false
+                            });
                         } else {
-                            alert("All fields are required.");
+                            swal({
+                                title: "Error!",
+                                text: "Please submit all the details.",
+                                type: "error",
+                                animation: false
+                            });
                         }
                     }
 
