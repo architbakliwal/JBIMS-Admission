@@ -145,8 +145,8 @@
 
 													<?php } ?>
 
-													<div class="column-twelve" style="margin:0px; font-size: 20px;font-weight: bold;">
-														<a href="<?php echo $baseurl;?>secure/application/document/go/document.php" style="color: blue; text-decoration: underline;">Download Application Form</a>
+													<div class="column-twelve" style="margin: 60px 30px; font-size: 20px;font-weight: bold;">
+														<a href="<?php echo $baseurl;?>secure/application/document/go/document.php" style="color: blue; text-decoration: underline; padding: 0; display: inline;">Download Application Form</a>
 													</div>
 											    </div>
 											</div>

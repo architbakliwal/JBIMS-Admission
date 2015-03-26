@@ -897,7 +897,7 @@ jQuery.noConflict()(function($) {
                         if ($("#section_done_cet").valid()) {
                             swal({
                                 title: "Success!",
-                                text: "Details saved successfully. Download your PDF.",
+                                text: "Details saved successfully. You may download your application PDF.",
                                 type: "success",
                                 animation: false
                             });
