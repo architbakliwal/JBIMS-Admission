@@ -1,6 +1,7 @@
 var currentYear = (new Date).getFullYear();
 var isApplicationValid = true;
 var catValid = false;
+var cetValid = false;
 var personalstatus = false;
 var contactstatus = false;
 var academicestatus = false;
@@ -600,9 +601,13 @@ jQuery.noConflict()(function($) {
                     checktimeout(responseText);
                     if ($("#section_scores").valid()) {
                         var isCatSelected = false;
+                        var isCetSelected = false;
                         $('input[name="testappearing[]"]:checked').each(function() {
                             if (this.value == 'CAT') {
                                 isCatSelected = true;
+                            }
+                            if (this.value == 'MH-CET') {
+                                isCetSelected = true;
                             }
                         });
                         if (isCatSelected) {
@@ -624,6 +629,29 @@ jQuery.noConflict()(function($) {
                             $("label[for='sky-tab6']").css('background-color', '#26C281');
                             $("#sky-tab7").prop("checked", true);
                             $("body").scrollTop(0);
+                        }
+
+                        if ($('#isinsidecetopen').length > 0) {
+                            if (isCetSelected) {
+                                if (cetValid) {
+                                    scorestatus = true;
+                                    $("label[for='sky-tab6']").css('background-color', '#26C281');
+                                    $("#sky-tab7").prop("checked", true);
+                                    $("body").scrollTop(0);
+                                } else {
+                                    $("label[for='sky-tab6']").css('background-color', '#F22613');
+                                    $(".modal-cet, .overlay").fadeIn();
+                                    if (isValid(applicantdata[8])) {
+                                        $('#window_cet').loadJSON(applicantdata[8]);
+                                    }
+                                    scorestatus = false;
+                                }
+                            } else {
+                                scorestatus = true;
+                                $("label[for='sky-tab6']").css('background-color', '#26C281');
+                                $("#sky-tab7").prop("checked", true);
+                                $("body").scrollTop(0);
+                            }
                         }
 
                     } else {
@@ -658,6 +686,27 @@ jQuery.noConflict()(function($) {
                         $(".modal, .overlay").fadeOut();
                     } else {
                         catValid = false;
+                    }
+
+                    changeSectionStatus();
+                },
+            });
+
+        });
+
+
+        $("#cat-save-button-inside").click(function() {
+            jQuery('#window_cet').ajaxSubmit({
+                beforeSubmit: function() {
+
+                },
+                success: function(responseText, statusText, xhr, $form) {
+                    checktimeout(responseText);
+                    if ($("#window_cet").valid()) {
+                        cetValid = true;
+                        $(".modal, .overlay").fadeOut();
+                    } else {
+                        cetValid = false;
                     }
 
                     changeSectionStatus();

@@ -96,6 +96,7 @@
 		while ($row = mysql_fetch_array($selectconfig, MYSQL_ASSOC)) {
 			$registration_closed = $row['registration_closed'];
 			$mh_cet_open = $row['mh_cet_open'];
+			$inside_mh_cet_open = $row['inside_mh_cet_open'];
 		}
 	}
 
