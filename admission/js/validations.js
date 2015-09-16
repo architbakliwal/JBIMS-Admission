@@ -15,8 +15,27 @@ jQuery.noConflict()(function($) {
 
         $("input[name=firstname]").ForceAlphabestOnly();
         $("input[name=middlename]").ForceAlphabestOnly();
-        $("input[name=lastname]").ForceAlphabestOnly();
         $("input[name=refreename]").ForceAlphabestOnly();
+
+        $("#academicachivements, #rolesandresponsibility, #refreeknowing").on('keyup', function() {
+            var words = this.value.match(/\S+/g).length;
+            if (words > 200) {
+                // Split the string on first 200 words and rejoin on spaces
+                var trimmed = $(this).val().split(/\s+/, 200).join(" ");
+                // Add a space at the end to keep new typing making new words
+                $(this).val(trimmed + " ");
+            }
+        });
+
+        $("#supportinfo").on('keyup', function() {
+            var words = this.value.match(/\S+/g).length;
+            if (words > 150) {
+                // Split the string on first 200 words and rejoin on spaces
+                var trimmed = $(this).val().split(/\s+/, 150).join(" ");
+                // Add a space at the end to keep new typing making new words
+                $(this).val(trimmed + " ");
+            }
+        });
 
 
         $("#section_personal").validate({
@@ -26,12 +45,15 @@ jQuery.noConflict()(function($) {
                     regexalpha: alphabetsregex
                 },
                 lastname: {
-                    required: true,
-                    regexalpha: alphabetsregex
+                    required: true
                 },
                 middlename: {
                     regexalpha: alphabetsregex
                 },
+                dob: {
+                    required: true,
+                    dpDate: true
+                }
             },
             errorPlacement: function(error, element) {
                 $(element).tooltipster('update', $(error).text());
@@ -128,6 +150,17 @@ jQuery.noConflict()(function($) {
 
         $("#section_workex").validate({
 
+            rules: {
+                workstarted: {
+                    required: true,
+                    dpDate: true
+                },
+                workcompleted: {
+                    required: true,
+                    dpDate: true
+                }
+            },
+
             errorPlacement: function(error, element) {
                 $(element).tooltipster('update', $(error).text());
             },
@@ -195,6 +228,13 @@ jQuery.noConflict()(function($) {
 
         $("#window_cat").validate({
 
+            rules: {
+                catexamdate: {
+                    required: true,
+                    dpDate: true
+                }
+            },
+
             errorPlacement: function(error, element) {
 
             },
@@ -255,6 +295,12 @@ jQuery.noConflict()(function($) {
         });
 
         $("#window_gre").validate({
+            rules: {
+                gredate: {
+                    required: true,
+                    dpDate: true
+                }
+            },
 
             errorPlacement: function(error, element) {
 
@@ -275,6 +321,12 @@ jQuery.noConflict()(function($) {
         });
 
         $("#window_gmat").validate({
+            rules: {
+                gmatdate: {
+                    required: true,
+                    dpDate: true
+                }
+            },
 
             errorPlacement: function(error, element) {
 
@@ -320,6 +372,10 @@ jQuery.noConflict()(function($) {
                 paymentemailid: {
                     required: true,
                     regexemail: emailregex
+                },
+                paymentdate: {
+                    required: true,
+                    dpDate: true
                 }
             },
 

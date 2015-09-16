@@ -4,6 +4,7 @@
 	include '../php/csrf_protection/csrf-class.php';
 
 	if(!isset($_SESSION)){
+	$some_name = session_name( "JBIMSAdmission" );
     	session_start();
 	}
     
@@ -12,7 +13,7 @@
 	
 	$language = array('en' => 'en','pt' => 'pt');
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
 		include '../php/language/'.$language[$_GET['lang']].'.php';
 	} else {
 		include '../php/language/en.php';
@@ -88,9 +89,13 @@
 			    	<div class="column-twelve">
 						<h4><?php echo $lang['dashboard_title'];?></h4>
 					</div>
-					<div class="column-twelve" style="color: red; font-weight: bold;">
+					<?php
+	if ( $registration_closed == 'Y' ) {
+		echo '<div class="column-twelve" style="color: red; font-weight: bold;">
 						<p><marquee scrollamount="6">Online Registrations are closed for MMS/MSc 2015-2017 batch.</marquee></p>
-					</div>
+						</div>';
+	}
+?>
                     <div class="column-eleven" style="text-align: left;">
 						<?php echo $lang['application_id'];?><?php echo $_SESSION['userName'];?>
 					</div>
@@ -167,9 +172,8 @@
             </div>
 		</div>
 		
-		<?php } else { ?>
+		<?php } else {
 		
-		<?php 
 			redirect($baseurl.'login.php?lang='.$_GET['lang'].'');		
 		 } ?>
 

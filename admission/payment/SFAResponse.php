@@ -26,7 +26,7 @@ include '../php/config/config.php';
 if($_POST){
 
     if($_POST['DATA']==null){
-        redirect('http://jbims.edu/admission/admin/paymentredirect.php');
+        redirect($baseurl.'admin/paymentredirect.php');
     }
                  
     $astrResponseData=$_POST['DATA'];
@@ -126,7 +126,7 @@ if($_POST){
             }
 
             echo "success";
-            redirect('http://jbims.edu/admission/admin/paymentredirect.php');
+            redirect($baseurl.'admin/paymentredirect.php');
 
         } else {
 

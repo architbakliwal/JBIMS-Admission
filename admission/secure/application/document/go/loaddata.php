@@ -3,6 +3,7 @@
 	// require_once('db.php');
 
 	if(!isset($_SESSION)){
+	$some_name = session_name( "JBIMSAdmission" );
     	session_start();
 	}
     
@@ -11,7 +12,7 @@
 	
 	$language = array('en' => 'en','pt' => 'pt');
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
 		include '../../../../php/language/'.$language[$_GET['lang']].'.php';
 	} else {
 		include '../../../../php/language/en.php';
@@ -51,8 +52,7 @@
 
 	$userQuery = mysql_query($userInfo);
 
-	if(! $userQuery )
-	{
+if ( ! $userQuery ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -79,8 +79,7 @@
 
 	$selectpersonal = mysql_query($sqlpersonal);
 
-	if(! $selectpersonal )
-	{
+if ( ! $selectpersonal ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -116,8 +115,7 @@
 
 	$selectcontact = mysql_query($contact);
 
-	if(! $selectcontact )
-	{
+if ( ! $selectcontact ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -152,8 +150,7 @@
 
 	$selectacademic = mysql_query($academic);
 
-	if(! $selectacademic )
-	{
+if ( ! $selectacademic ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -213,8 +210,7 @@
 
 	$selectacademicadd = mysql_query($academicadd);
 
-	if(! $selectacademicadd )
-	{
+if ( ! $selectacademicadd ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -291,8 +287,7 @@
 
 	$selectworkex = mysql_query($workex);
 
-	if(! $selectworkex )
-	{
+if ( ! $selectworkex ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -348,8 +343,7 @@
 
 	$selectworkexadd = mysql_query($workexadd);
 
-	if(! $selectworkexadd )
-	{
+if ( ! $selectworkexadd ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -418,8 +412,7 @@
 
 	$selectrefree = mysql_query($sqlrefree);
 
-	if(! $selectrefree )
-	{
+if ( ! $selectrefree ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -439,8 +432,7 @@
 
 	$selecttestscore = mysql_query($testscore);
 
-	if(! $selecttestscore )
-	{
+if ( ! $selecttestscore ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -455,8 +447,7 @@
 
 	$selectdoc = mysql_query($sqldoc);
 
-	if(! $selectdoc )
-	{
+if ( ! $selectdoc ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -483,8 +474,7 @@
 
 	$selectpayment = mysql_query($payment);
 
-	if(! $selectpayment )
-	{
+if ( ! $selectpayment ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -512,8 +502,7 @@
 
 	$selectcat = mysql_query($cat);
 
-	if(! $selectcat )
-	{
+if ( ! $selectcat ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -550,8 +539,7 @@
 
 	$selectgre = mysql_query($gre);
 
-	if(! $selectgre )
-	{
+if ( ! $selectgre ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -580,8 +568,7 @@
 
 	$selectgmat = mysql_query($gmat);
 
-	if(! $selectgmat )
-	{
+if ( ! $selectgmat ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 
@@ -612,8 +599,7 @@
 
 	$selectstatus = mysql_query($status);
 
-	if(! $selectstatus )
-	{
+if ( ! $selectstatus ) {
 	  die('Could not enter data: ' . mysql_error());
 	}
 

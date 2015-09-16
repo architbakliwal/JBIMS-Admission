@@ -15,7 +15,7 @@
     }*/
 
 	function redirect_time($url){
-	    echo '<script type="text/javascript">window.setTimeout(function(){window.location.href = "'.$url.'";}, 2000)</script>';
+	    echo '<script type="text/javascript">window.setTimeout(function(){window.location.href = "'.$url.'";}, 1000)</script>';
     } 
 	
 ?>

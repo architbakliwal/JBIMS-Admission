@@ -1,4 +1,4 @@
-var currentYear = (new Date).getFullYear();
+var currentYear = (new Date()).getFullYear();
 var isApplicationValid = true;
 var catValid = false;
 var cetValid = false;
@@ -13,7 +13,7 @@ var paymentstatus = false;
 var applicantdata = null;
 
 function isValid(object) {
-    if (object == undefined || object == null || object.length == 0) {
+    if (object === undefined || object === null || object.length === 0) {
         return false;
     } else {
         return true;
@@ -23,11 +23,11 @@ function isValid(object) {
 jQuery.noConflict()(function($) {
     $(document).ready(function() {
 
-        // $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+        $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
         $.fn.changeVal = function(v) {
             return $(this).val(v).trigger("change");
-        }
+        };
 
         $('#academic-clone').cloneya({
             removeRequired: true,
@@ -56,8 +56,6 @@ jQuery.noConflict()(function($) {
 
 
         $("input[type=text]").attr('maxlength', 60);
-
-        $("textarea").attr('maxlength', 2000);
 
         $("#dob").datepicker({
             changeMonth: true,
@@ -958,7 +956,6 @@ jQuery.noConflict()(function($) {
                                 animation: false
                             });
                         }
-                    }
 
                 },
             });

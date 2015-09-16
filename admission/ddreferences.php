@@ -1,35 +1,36 @@
 <?php
-    
-	include dirname(__FILE__).'/php/csrf_protection/csrf-token.php';
-	include dirname(__FILE__).'/php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include dirname(__FILE__).'/php/config/config.php';
-	include dirname(__FILE__).'/php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-token.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include dirname(__FILE__).'/php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include dirname(__FILE__).'/php/language/en.php';
-	}
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
+
+include dirname( __FILE__ ).'/php/config/config.php';
+include dirname( __FILE__ ).'/php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include dirname( __FILE__ ).'/php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include dirname( __FILE__ ).'/php/language/en.php';
+}
 
 ?>
 <!doctype html>
 <html>
     <head>
 
-        <?php include dirname(__FILE__).'/header.php'; ?>
+        <?php include dirname( __FILE__ ).'/header.php'; ?>
 
     </head>
-	
+
     <body>
 
-		<div class="wrapper"> 
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -70,7 +71,7 @@
 																<input type="file" id="ddsheet" name="ddsheet" class="file" onchange="document.getElementById('ddsheet1').value = this.value;" accept="application/vnd.ms-excel">
 																<input type="text" id="ddsheet1" class="input" placeholder="No file selected">
 															</label>
-														</div>														
+														</div>
 													</div>
 													<div class="column-two">
 														<button type="button" id="submit-button-dd" class="button button-large button-green">Submit</button>

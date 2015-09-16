@@ -31,7 +31,7 @@
 										<div class="file-group irequire">
 											<label for="passportphoto" class="group label-file">
 												<span class="button-upload blue">Choose</span>								
-												<input type="file" id="passportphoto" name="passportphoto" class="file" onchange="document.getElementById('passportphotofake1').value = this.value;" title="Digital or scanned passport size photograph.<br>Dimension: 2 by 2 inches. Resolution: Min 600 x 600 pixels, Max 1200 x 1200 pixels. File Formats Supported: GIF, JPEG, JPG & PNG<br>Maximum file size : 400 Kb" id="tooltip-help">
+												<input type="file" id="passportphoto" name="passportphoto" class="file" onchange="document.getElementById('passportphotofake1').value = this.value.replace(/C:\\fakepath\\/i, '');" title="Digital or scanned passport size photograph.<br>Dimension: 2 by 2 inches. Resolution: Min 600 x 600 pixels, Max 1200 x 1200 pixels. File Formats Supported: GIF, JPEG, JPG & PNG<br>Maximum file size : 400 Kb" id="tooltip-help">
 												<input type="text" id="passportphotofake1" name="passportphotofake1" class="input" placeholder="No file selected">
 											</label>
 										</div>
@@ -95,7 +95,7 @@
 								    <div class="column-eight">
 										<div class="textarea-group">
 										    <label for="supportinfo" class="group label-textarea">
-				                                <textarea rows="5" id="supportinfo" name="supportinfo" class="textarea no-resisable" placeholder="Would you like to tell us something apart from the information given to support your candidature? (Max 100 words)"></textarea>
+				                                <textarea rows="5" id="supportinfo" name="supportinfo" class="textarea no-resisable" placeholder="Would you like to tell us something apart from the information given to support your candidature? (Max 150 words)"></textarea>
 											</label>
 									    </div>
 									</div>
@@ -113,10 +113,10 @@
 							<button type="button" id="back-button-doc" class="button button-large button-blue">Back</button>
 						</div>
 						<div class="column-two">
-							<button type="button" id="save-button-doc" class="button button-large button-blue">Save</button>
+							<button type="button" id="save-button-doc" class="button button-large button-green">Upload & Save</button>
 						</div>
 						<div class="column-two">
-							<button type="button" id="continue-button-doc" class="button button-large button-orange">Submit</button>
+							<button type="button" id="continue-button-doc" class="button button-large button-orange">Proceed to Payment</button>
 						</div>						
 					</div>
 				</fieldset>

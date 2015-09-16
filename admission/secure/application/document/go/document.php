@@ -860,7 +860,7 @@ $pdf->writeHTML($tbl, true, false, false, false, '');
 ob_end_clean();
 //Close and output PDF document
 // $pdf->Output('/var/www/vhosts/jbims.edu/public_html/admission/secure/application/document/go/documents/' . $finalapplicationid . '.pdf', 'F');
-$pdf->Output($finalapplicationid . '.pdf', 'D');
+$pdf->Output($finalapplicationid . '.pdf', 'I');
 
 //============================================================+
 // END OF FILE

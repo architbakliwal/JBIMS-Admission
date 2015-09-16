@@ -1,49 +1,50 @@
 <?php
-    
-	include dirname(__FILE__).'/php/csrf_protection/csrf-token.php';
-	include dirname(__FILE__).'/php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include dirname(__FILE__).'/php/config/config.php';
-	include dirname(__FILE__).'/php/config/functions.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-token.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-class.php';
 
-	/*date_default_timezone_set('Asia/Kolkata'); 
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
+
+include dirname( __FILE__ ).'/php/config/config.php';
+include dirname( __FILE__ ).'/php/config/functions.php';
+
+/*date_default_timezone_set('Asia/Kolkata');
 	$expiryDate = strtotime('11-01-2015');
 	$currentDate = strtotime('now');
 	if($currentDate > $expiryDate) {
 		redirect($baseurl.'admin/thankyou.php');
 		die();
 	}*/
-	if($registration_closed == 'Y') {
-		redirect($baseurl.'admin/thankyou.php');
-		die();
-	}
-	
-	$language = array('en' => 'en','pt' => 'pt');
+if ( $registration_closed == 'Y' ) {
+	redirect( $baseurl.'admin/thankyou.php' );
+	die();
+}
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include dirname(__FILE__).'/php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include dirname(__FILE__).'/php/language/en.php';
-	}
+$language = array( 'en' => 'en', 'pt' => 'pt' );
 
-	if($_SESSION['userLogin'] && $_SESSION['userName']){
-				
-		redirect($baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'');
-		
-	}	
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include dirname( __FILE__ ).'/php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include dirname( __FILE__ ).'/php/language/en.php';
+}
+
+if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) {
+
+	redirect( $baseurl.'admin/dashboard.php?lang='.$_GET['lang'].'' );
+
+}
 ?>
 <!doctype html>
 <html>
     <head>
 
-        <?php include dirname(__FILE__).'/header.php'; ?>
+        <?php include dirname( __FILE__ ).'/header.php'; ?>
 
     </head>
-	
+
     <body>
 
 		<div class="container">
@@ -65,7 +66,7 @@
 						</div>
 						<div class="column-twelve">
 							<h4><i class="icon-users"></i><?php echo $lang['form_register_title'];?></h4>
-						</div>							
+						</div>
 					</div>
 				</div>
 				<div class="section">
@@ -77,20 +78,20 @@
 								</div>
 								<div class="column-twelve">
 									<div class="input-group">
-										<?php echo CSRF::make('register-form')->protect();?>                                     
+										<?php echo CSRF::make( 'register-form' )->protect();?>
 									</div>
 								</div>
 								<div class="column-twelve">
 									<div class="box irequire">
 									    <div class="box-header">
-										    <h4><?php echo $lang['program_option_1'];?></h4>
+										    <h4>Select program you want to apply for...</h4>
 										</div>
 										<div class="box-section">
 											<div class="column-six">
 												<div class="checkbox-group space-bottom">
 													<label for="program1" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MMS" id="program1">
-														<span class="label space-right"><?php echo $lang['program_option_2'];?></span>
+														<span class="label space-right">Masters in Management Studies (MMS)</span>
 													</label>
 												</div>
 											</div>
@@ -98,7 +99,7 @@
 												<div class="checkbox-group space-bottom">
 													<label for="program2" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MMM" id="program2" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_3'];?></span>
+														<span class="label space-right">(Part-time)Masters in Marketing management (MMM)</span>
 													</label>
 												</div>
 											</div>
@@ -106,7 +107,7 @@
 												<div class="checkbox-group space-bottom">
 													<label for="program3" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MIM" id="program3" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_4'];?></span>
+														<span class="label space-right">(Part-time)Masters in Information management (MIM)</span>
 													</label>
 												</div>
 											</div>
@@ -114,7 +115,7 @@
 												<div class="checkbox-group space-bottom">
 													<label for="program4" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MHRDM" id="program4" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_5'];?></span>
+														<span class="label space-right">(Part-time)Masters in Human Resource Development & Management (MHRDM)</span>
 													</label>
 												</div>
 											</div>
@@ -122,7 +123,7 @@
 												<div class="checkbox-group space-bottom">
 													<label for="program5" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MFM" id="program5" disabled="disabled">
-														<span class="label space-right"><?php echo $lang['program_option_6'];?></span>
+														<span class="label space-right">(Part-time)Masters in Financial Management (MFM)</span>
 													</label>
 												</div>
 											</div>
@@ -130,7 +131,7 @@
 												<div class="checkbox-group space-bottom">
 													<label for="program6" class="group">
 														<input type="checkbox" name="program[]" class="checkbox" value="MSc Finance" id="program6">
-														<span class="label space-right"><?php echo $lang['program_option_7'];?></span>
+														<span class="label space-right">MSc Finance</span>
 													</label>
 												</div>
 											</div>
@@ -185,7 +186,7 @@
 										</label>
 								    </div>
                                 </div>
-								<?php if($captcha == true){ ?>
+								<?php if ( $captcha == true ) { ?>
 								<div class="column-six">
                                     <div class="captcha-group">
                                         <div class="captcha center">
@@ -194,7 +195,7 @@
                                     </div>
                                 </div>
 								<div class="column-six">
-                                    <div class="captcha-group">												
+                                    <div class="captcha-group">
                                         <label for="captcha" class="group label-captcha">
 									        <input type="text" name="captcha" class="captcha center" id="captcha" maxlength="6" placeholder="<?php echo $lang['form_register_placeholder_captcha'];?>">
 										</label>
@@ -212,7 +213,7 @@
 							</div>
 						</fieldset>
 					</form>
-				</div>	
+				</div>
 				<div class="footer">
 					<div class="grid-container">
 						<div class="column-twelve">
@@ -222,6 +223,6 @@
 				</div>
 			</div>
 		</div>
-			
+
     </body>
 </html>

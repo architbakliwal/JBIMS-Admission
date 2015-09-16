@@ -5,7 +5,7 @@
 	-------------------------------------------------- */
 
 	error_reporting(0);
-	
+
 	// Site Configuration
     	
     $lang['website_title']		                        = 'Jamnalal Bajaj Institute of Management Studies - Admissions 2015'; 
@@ -277,15 +277,5 @@
 	$lang['automessage_forgot_password_introdution']		   = 'Please change your password by clicking on the below link.'; 
 	$lang['automessage_forgot_password_link']		           = 'Change your Password'; 
     $lang['automessage_forgot_password_mistake']               = 'If you did not register in our website, please ignore this email.<br>For more information, please visit our support center';
-
-    // Drop down options for program selection
-
-    $lang['program_option_1']			= 'Select program you want to apply for...';
-    $lang['program_option_2']			= 'Masters in Management Studies (MMS)';
-    $lang['program_option_3']			= '(Part-time)Masters in Marketing management (MMM)';
-    $lang['program_option_4']			= '(Part-time)Masters in Information management (MIM)';
-    $lang['program_option_5']			= '(Part-time)Masters in Human Resource Development & Management (MHRDM)';
-    $lang['program_option_6']			= '(Part-time)Masters in Financial Management (MFM)';
-    $lang['program_option_7']			= 'MSc Finance';
 	
 ?>

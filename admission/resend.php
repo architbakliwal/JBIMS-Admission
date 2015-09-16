@@ -1,32 +1,33 @@
 <?php
-    
-	include dirname(__FILE__).'/php/csrf_protection/csrf-token.php';
-	include dirname(__FILE__).'/php/csrf_protection/csrf-class.php';
 
-	if(!isset($_SESSION)){
-    	session_start();
-	}
-    
-	include dirname(__FILE__).'/php/config/config.php';
-	include dirname(__FILE__).'/php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-token.php';
+include dirname( __FILE__ ).'/php/csrf_protection/csrf-class.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include dirname(__FILE__).'/php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include dirname(__FILE__).'/php/language/en.php';
-	}
-	
+if ( !isset( $_SESSION ) ) {
+	$some_name = session_name( "JBIMSAdmission" );
+	session_start();
+}
+
+include dirname( __FILE__ ).'/php/config/config.php';
+include dirname( __FILE__ ).'/php/config/functions.php';
+
+$language = array( 'en' => 'en', 'pt' => 'pt' );
+
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include dirname( __FILE__ ).'/php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include dirname( __FILE__ ).'/php/language/en.php';
+}
+
 ?>
 <!doctype html>
 <html>
     <head>
 
-        <?php include dirname(__FILE__).'/header.php'; ?>
+        <?php include dirname( __FILE__ ).'/header.php'; ?>
 
     </head>
-	
+
     <body>
 
 		<div class="container">
@@ -48,7 +49,7 @@
 						</div>
 						<div class="column-twelve">
 							<h4><i class="icon-spinner-12"></i><?php echo $lang['form_resend_activation_token_title'];?></h4>
-						</div>							
+						</div>
 					</div>
 				</div>
 				<div class="section">
@@ -60,7 +61,7 @@
 								</div>
 								<div class="column-twelve">
 									<div class="input-group">
-										<?php echo CSRF::make('resend-form')->protect();?>                                     
+										<?php echo CSRF::make( 'resend-form' )->protect();?>
 									</div>
 								</div>
 								<div class="column-twelve">
@@ -71,7 +72,7 @@
 										</label>
 								    </div>
 								</div>
-								<?php if($captcha == true){ ?>
+								<?php if ( $captcha == true ) { ?>
 								<div class="column-six">
                                     <div class="captcha-group">
                                         <div class="captcha center">
@@ -80,7 +81,7 @@
                                     </div>
                                 </div>
 								<div class="column-six">
-                                    <div class="captcha-group">												
+                                    <div class="captcha-group">
                                         <label for="captcha" class="group label-captcha">
 									        <input type="text" name="captcha" class="captcha center" id="captcha" maxlength="6" placeholder="<?php echo $lang['form_resend_activation_token_placeholder_captcha'];?>">
 										</label>
@@ -93,7 +94,7 @@
 							</div>
 						</fieldset>
 					</form>
-				</div>	
+				</div>
 				<div class="footer">
 					<div class="grid-container">
 						<div class="column-twelve">
@@ -103,6 +104,6 @@
 				</div>
 			</div>
 		</div>
-			
+
     </body>
 </html>

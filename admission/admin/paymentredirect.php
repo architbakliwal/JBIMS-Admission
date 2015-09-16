@@ -1,122 +1,121 @@
 <?php
+$some_name = session_name( "JBIMSAdmission" );
 session_start();
 
-	include '../php/csrf_protection/csrf-token.php';
-	include '../php/csrf_protection/csrf-class.php';
+include '../php/csrf_protection/csrf-token.php';
+include '../php/csrf_protection/csrf-class.php';
 
-	include '../php/config/config.php';
-	include '../php/config/functions.php';
-	
-	$language = array('en' => 'en','pt' => 'pt');
+include '../php/config/config.php';
+include '../php/config/functions.php';
 
-	if (isset($_GET['lang']) AND array_key_exists($_GET['lang'], $language)){
-		include '../php/language/'.$language[$_GET['lang']].'.php';
-	} else {
-		include '../php/language/en.php';
-	}
+$language = array( 'en' => 'en', 'pt' => 'pt' );
 
-	if(!$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset($_SESSION['userName'])){
-				
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-			
-	} else {					
-		$time = time();
-								
-		if($time > $_SESSION['expire']){
-			session_destroy();
-			timeout();
-			exit(0);
-		}		
-	}
+if ( isset( $_GET['lang'] ) and array_key_exists( $_GET['lang'], $language ) ) {
+	include '../php/language/'.$language[$_GET['lang']].'.php';
+} else {
+	include '../php/language/en.php';
+}
 
-	$_SESSION['start'] = time();
-	$_SESSION['expire'] = $_SESSION['start'] + (60*60);
+if ( !$_SESSION['userLogin'] && !$_SESSION['userName'] && !isset( $_SESSION['userName'] ) ) {
 
-	if(strlen(trim($_SESSION['userName'])) == 0) {
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+
+} else {
+	$time = time();
+
+	if ( $time > $_SESSION['expire'] ) {
 		session_destroy();
-		redirect($baseurl.'login.php?lang='.$_GET['lang'].'');
-		die();
+		timeout();
+		exit( 0 );
+	}
+}
+
+$_SESSION['start'] = time();
+$_SESSION['expire'] = $_SESSION['start'] + ( 60*60 );
+
+if ( strlen( trim( $_SESSION['userName'] ) ) == 0 ) {
+	session_destroy();
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+	die();
+}
+
+$finalpaymentstatus = '';
+
+if ( $mysql == true ) {
+	$applicationid = $_SESSION['userName'];
+	$applicantName = '';
+	$applicationfees = 0;
+	$applicantemailid = '';
+	$fname = '';
+	$lname = '';
+	$sqlpayment = "SELECT dd_reference_number, payment_amount, payment_status FROM  `users_payment_details` WHERE application_id ='" . $applicationid ."'";
+
+	$selectpayment = mysql_query( $sqlpayment );
+
+	if ( ! $selectpayment ) {
+		die( 'Could not enter data: ' . mysql_error() );
 	}
 
-	$finalpaymentstatus = '';
-
-	if ($mysql == true){
-		$applicationid = $_SESSION['userName'];
-		$applicantName = '';
-		$applicationfees = 0;
-		$applicantemailid = '';
-		$fname = '';
-		$lname = '';
-		$sqlpayment = "SELECT dd_reference_number, payment_amount, payment_status FROM  `users_payment_details` WHERE application_id ='" . $applicationid ."'";
-
-		$selectpayment = mysql_query($sqlpayment);
-
-		if(! $selectpayment )
-		{
-		  die('Could not enter data: ' . mysql_error());
-		}
-
-		while ($row = mysql_fetch_array($selectpayment, MYSQL_ASSOC)) {
-			$finalpaymentid = $row['dd_reference_number'];
-			$finalpaymentamount = $row['payment_amount'];
-			$finalpaymentstatus = $row['payment_status'];
-		}
-
-		$sqlcontact = "SELECT * FROM  `admission_users` WHERE application_id ='" . $applicationid ."'";
-
-		$selectcontact = mysql_query($sqlcontact);
-
-		if(! $selectcontact )
-		{
-		  die('Could not enter data: ' . mysql_error());
-		}
-
-		while ($row = mysql_fetch_array($selectcontact, MYSQL_ASSOC)) {
-			$applicantemailid = $row['email_id'];
-			$fname = $row['f_name'];
-			$lname = $row['l_name'];
-		}
-
-	} else {
-		redirect('http://jbims.edu/admission/');
+	while ( $row = mysql_fetch_array( $selectpayment, MYSQL_ASSOC ) ) {
+		$finalpaymentid = $row['dd_reference_number'];
+		$finalpaymentamount = $row['payment_amount'];
+		$finalpaymentstatus = $row['payment_status'];
 	}
 
+	$sqlcontact = "SELECT * FROM  `admission_users` WHERE application_id ='" . $applicationid ."'";
 
-	if($finalpaymentstatus == "Complete") {
-		$responsemsg = '<font color="green">CONGRATULATIONS! Your payment was successful. Please check your mail for transaction id.</font>';
-	} else {
-		$responsemsg = '<font color="red">Your payment was not successful, please try again or contact support. Please check your mail for transaction id.</font>';
+	$selectcontact = mysql_query( $sqlcontact );
+
+	if ( ! $selectcontact ) {
+		die( 'Could not enter data: ' . mysql_error() );
 	}
 
-	include '../php/phpmailer/PHPMailerAutoload.php';							
-	include '../php/messages/autopaymentemail.php';
-												
-	$automail = new PHPMailer();
-	$automail->IsSMTP();
-	$automail->SMTPAuth = true;
-	$automail->SMTPSecure = $protocol;
-	$automail->Host = $host;
-	$automail->Port = $port;
-	$automail->Username = $smtpusername;
-	$automail->Password = $smtppassword;
-	$automail->From = $youremail;
-	$automail->FromName = $yourname;
-	$automail->isHTML(true);
-	$automail->CharSet = "UTF-8";
-	$automail->Encoding = "base64";
-	$automail->Timeout = 200;
-	$automail->SMTPDebug = 0; // 0 = off (for production use) // 1 = client messages // 2 = client and server messages
-	$automail->ContentType = "text/html";
-	$automail->AddAddress($applicantemailid);
-	$automail->Subject = "JBIMS Application Payment";
-	$automail->Body = $autopaymentemail;
-	$automail->AltBody = "To view this message, please use an HTML compatible email";
-						
-	if ($automail->Send()) {
-	} else {
+	while ( $row = mysql_fetch_array( $selectcontact, MYSQL_ASSOC ) ) {
+		$applicantemailid = $row['email_id'];
+		$fname = $row['f_name'];
+		$lname = $row['l_name'];
 	}
-	
-	
+
+} else {
+	redirect( $baseurl );
+}
+
+
+if ( $finalpaymentstatus == "Complete" ) {
+	$responsemsg = '<font color="green">CONGRATULATIONS! Your payment was successful. Please check your mail for transaction id.</font>';
+} else {
+	$responsemsg = '<font color="red">Your payment was not successful, please try again or contact support. Please check your mail for transaction id.</font>';
+}
+
+include '../php/phpmailer/PHPMailerAutoload.php';
+include '../php/messages/autopaymentemail.php';
+
+$automail = new PHPMailer();
+$automail->IsSMTP();
+$automail->SMTPAuth = true;
+$automail->SMTPSecure = $protocol;
+$automail->Host = $host;
+$automail->Port = $port;
+$automail->Username = $smtpusername;
+$automail->Password = $smtppassword;
+$automail->From = $youremail;
+$automail->FromName = $yourname;
+$automail->isHTML( true );
+$automail->CharSet = "UTF-8";
+$automail->Encoding = "base64";
+$automail->Timeout = 200;
+$automail->SMTPDebug = 0; // 0 = off (for production use) // 1 = client messages // 2 = client and server messages
+$automail->ContentType = "text/html";
+$automail->AddAddress( $applicantemailid );
+$automail->Subject = "JBIMS Application Payment";
+$automail->Body = $autopaymentemail;
+$automail->AltBody = "To view this message, please use an HTML compatible email";
+
+if ( $automail->Send() ) {
+} else {
+}
+
+
 ?>
 <!doctype html>
 <html>
@@ -125,11 +124,11 @@ session_start();
         <?php include '../header.php'; ?>
 
     </head>
-	
+
     <body>
 
-	    <?php if($_SESSION['userLogin'] && $_SESSION['userName']){ ?>
-		<div class="wrapper"> 
+	    <?php if ( $_SESSION['userLogin'] && $_SESSION['userName'] ) { ?>
+		<div class="wrapper">
 		    <div class="form-bar">
 				<div class="top-bar bar-green"></div>
 				<div class="top-bar bar-orange"></div>
@@ -148,7 +147,7 @@ session_start();
                     <div class="column-twelve" style="text-align: left;">
 						<?php echo $lang['application_id'];?><?php echo $_SESSION['userName'];?>
 					</div>
-					
+
 				</div>
 			</div>
 			<div class="section">
@@ -164,7 +163,7 @@ session_start();
 													<div class="column-twelve" style="margin:30px;">
 														<h3 style="text-align: center;"><?php echo $responsemsg;?></h3>
 													</div>
-													<?php if($finalpaymentstatus == "Complete"){ ?>
+													<?php if ( $finalpaymentstatus == "Complete" ) { ?>
 													<div class="column-twelve" style="margin:30px;">
 														<div class="input-group-right irequire">
 															<div class="radio-group">
@@ -172,8 +171,8 @@ session_start();
 																	<input type="radio" name="iagree" class="" value="Yes" id="Yes">
 																	<span class="label space-right">I hereby declare that the information given in this application form is complete, true and correct to best of my knowledge. If admitted, I agree to comply with the rules of the institute.</span>
 																</label>
-															</div>	
-														</div>		
+															</div>
+														</div>
 													</div>
 													<div class="column-twelve" style="margin:30px;">
 														<div class="column-two">
@@ -188,7 +187,7 @@ session_start();
 													</div>
 													<div class="column-twelve">
 														<div class="terms">
-															<p><a href="http://jbims.edu/admission/terms.php" target="_blank" style="padding:0px;">Terms & Conditions</a></p>
+															<p><a href="<?php echo $baseurl;?>terms.php" target="_blank" style="padding:0px;">Terms & Conditions</a></p>
 														</div>
 													</div>
 													<?php } ?>
@@ -210,12 +209,12 @@ session_start();
 				</div>
             </div>
 		</div>
-		
+
 		<?php } else { ?>
-		
-		<?php 
-			redirect($baseurl.'login.php?lang='.$_GET['lang'].'');		
-		 } ?>
+
+		<?php
+	redirect( $baseurl.'login.php?lang='.$_GET['lang'].'' );
+} ?>
 
     </body>
 </html>
