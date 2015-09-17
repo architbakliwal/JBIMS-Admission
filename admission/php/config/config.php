@@ -28,9 +28,9 @@
 		}
 	}
 
-	// error_reporting(0);
+	error_reporting(0);
 
-	error_reporting(E_ALL ^ E_DEPRECATED);
+	// error_reporting(E_ALL & ~E_NOTICE);
 
 	// Enter your Name here!
     $yourname = 'JBIMS Admission';
@@ -107,7 +107,6 @@
 		while ($row = mysql_fetch_array($selectconfig, MYSQL_ASSOC)) {
 			$registration_closed = $row['registration_closed'];
 			$mh_cet_open = $row['mh_cet_open'];
-			$inside_mh_cet_open = $row['inside_mh_cet_open'];
 		}
 	}
 

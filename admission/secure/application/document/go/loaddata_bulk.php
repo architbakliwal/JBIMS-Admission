@@ -14,7 +14,7 @@
 	}
 
 	
-	$applicationid = strip_tags(trim('JB2015014198'));
+	$applicationid = strip_tags(trim('JB2015000034'));
 	
 	$finalapplicationid = htmlspecialchars($applicationid, ENT_QUOTES, 'UTF-8');
 	
