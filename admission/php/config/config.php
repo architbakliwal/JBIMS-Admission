@@ -9,7 +9,7 @@
 	    $database_Connection = "jbims_admission";
 	    $username_Connection = "root";
 	    $password_Connection = "";
-	    $baseurl = 'http://127.0.0.1/JBIMS/';
+	    $baseurl = 'http://127.0.0.1/JBIMS Admission/';
 	} else {
 		$hostname_Connection = "localhost";
 	    $database_Connection = "jbims_admission";

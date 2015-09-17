@@ -3,7 +3,7 @@
 	// require_once('db.php');
 
 	if(!isset($_SESSION)){
-	$some_name = session_name( "JBIMSAdmission" );
+		$some_name = session_name( "JBIMSAdmission" );
     	session_start();
 	}
     

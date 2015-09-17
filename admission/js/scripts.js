@@ -661,7 +661,7 @@ jQuery.noConflict()(function($) {
                     }
 
                     changeSectionStatus();
-                },
+                }
             });
 
 
@@ -957,9 +957,10 @@ jQuery.noConflict()(function($) {
                             });
                         }
 
-                },
-            });
+                    }
+                }
 
+            });
         });
 
 
